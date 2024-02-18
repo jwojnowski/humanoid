@@ -11,7 +11,9 @@ ThisBuild / developers       := List(
 )
 
 // publish to s01.oss.sonatype.org (set to true to publish to oss.sonatype.org instead)
-ThisBuild / tlSonatypeUseLegacyHost := false
+ThisBuild / tlSonatypeUseLegacyHost    := false
+ThisBuild / tlCiReleaseBranches        := Seq("main")
+ThisBuild / githubWorkflowJavaVersions := Seq(JavaSpec.temurin("21"))
 
 val Scala213 = "2.13.12"
 ThisBuild / crossScalaVersions := Seq(Scala213, "3.3.1")
