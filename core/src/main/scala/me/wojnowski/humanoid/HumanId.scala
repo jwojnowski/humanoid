@@ -43,7 +43,8 @@ case object HumanId {
 
   def parsePrefixOptional[P <: String, Id](
     rawString: String
-  )(implicit valueOfPrefix: ValueOf[P],
+  )(implicit
+    valueOfPrefix: ValueOf[P],
     idable: IdConverter[Id]
   ): Either[String, HumanId[P, Id]] =
     idable.fromString(rawString.stripPrefix(valueOfPrefix.value + "_")).map(id => HumanId[P, Id](id))
