@@ -20,7 +20,6 @@ class UuidGeneratorTest extends FunSuite {
 
   test("Uses UUIDGen") {
 
-
     CustomerId.random[Try].map { uuid =>
       assertEquals(uuid.id, uuid1)
     }
