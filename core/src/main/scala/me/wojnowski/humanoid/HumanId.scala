@@ -29,7 +29,7 @@ final case class HumanId[P <: String, Id](id: Id)(implicit valueOfPrefix: ValueO
 
   def renderNoPrefix: String = IdConverter[Id].renderString(id)
 
-  override def toString: String = s"${HumanId.productPrefix}[\"${valueOfPrefix.value}\"]($renderNoPrefix)"
+  override def toString: String = renderWithPrefix
 }
 
 case object HumanId {
