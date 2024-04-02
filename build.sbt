@@ -1,5 +1,5 @@
 // https://typelevel.org/sbt-typelevel/faq.html#what-is-a-base-version-anyway
-ThisBuild / tlBaseVersion := "0.2" // your current series x.y
+ThisBuild / tlBaseVersion := "0.2"
 
 ThisBuild / organization     := "me.wojnowski"
 ThisBuild / organizationName := "Jakub Wojnowski"
@@ -58,4 +58,17 @@ lazy val scuid =
       )
     )
 
-lazy val root = tlCrossRootProject.aggregate(core, scuid, uuid)
+lazy val circe =
+  project
+    .in(file("circe"))
+    .dependsOn(core)
+    .settings(
+      name := "humanoid-circe",
+      libraryDependencies ++= Seq(
+        "io.circe"      %% "circe-core"   % "0.14.6",
+        "io.circe"      %% "circe-parser" % "0.14.6" % Test,
+        "org.scalameta" %% "munit"        % "0.7.29" % Test
+      )
+    )
+
+lazy val root = tlCrossRootProject.aggregate(core, scuid, uuid, circe)

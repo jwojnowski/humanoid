@@ -14,6 +14,7 @@ about it).
 libraryDependencies += "me.wojnowski" %% "humanoid" % "<version>"
 libraryDependencies += "me.wojnowski" %% "humanoid-scuid" % "<version>" // optional, for Cuid2 integration
 libraryDependencies += "me.wojnowski" %% "humanoid-uuid" % "<version>" // optional, for UUID integration
+libraryDependencies += "me.wojnowski" %% "humanoid-circe" % "<version>" // optional, for Circe codecs
 ```
 
 ### Usage
@@ -77,4 +78,14 @@ For random IDs, an implicit instance of `IdGenerator` can be provided:
 implicit val myIdGenerator: IdGenerator[MyId] = IdGenerator[F, MyId] {
   def generate: F[MyId] = ???
 }
+```
+
+### Circe integration
+```scala
+libraryDependencies += "me.wojnowski" %% "humanoid-circe" % "<version>"
+```
+
+```scala
+import me.wojnowski.humanoid.circe.strict._  // require prefix when decoding, encode with prefix
+import me.wojnowski.humanoid.circe.relaxed._ // don't require prefix when decoding, encode with prefix
 ```
