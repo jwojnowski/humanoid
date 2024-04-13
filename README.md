@@ -15,6 +15,7 @@ libraryDependencies += "me.wojnowski" %% "humanoid" % "<version>"
 libraryDependencies += "me.wojnowski" %% "humanoid-scuid" % "<version>" // optional, for Cuid2 integration
 libraryDependencies += "me.wojnowski" %% "humanoid-uuid" % "<version>" // optional, for UUID integration
 libraryDependencies += "me.wojnowski" %% "humanoid-circe" % "<version>" // optional, for Circe codecs
+libraryDependencies += "me.wojnowski" %% "humanoid-tapir" % "<version>" // optional, for Tapir schema/codecs
 ```
 
 ### Usage
@@ -88,4 +89,14 @@ libraryDependencies += "me.wojnowski" %% "humanoid-circe" % "<version>"
 ```scala
 import me.wojnowski.humanoid.circe.strict._  // require prefix when decoding, encode with prefix
 import me.wojnowski.humanoid.circe.relaxed._ // don't require prefix when decoding, encode with prefix
+```
+
+### Tapir integration
+```scala
+libraryDependencies += "me.wojnowski" %% "humanoid-tapir" % "<version>"
+```
+
+```scala
+import me.wojnowski.humanoid.tapir.strict._  // require prefix when decoding, encode with prefix
+import me.wojnowski.humanoid.tapir.relaxed._ // don't require prefix when decoding, encode with prefix
 ```
