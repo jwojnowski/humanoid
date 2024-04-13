@@ -61,7 +61,7 @@ lazy val scuid =
 lazy val circe =
   project
     .in(file("circe"))
-    .dependsOn(core)
+    .dependsOn(core % "compile->compile;test->test")
     .settings(
       name := "humanoid-circe",
       libraryDependencies ++= Seq(
@@ -71,4 +71,16 @@ lazy val circe =
       )
     )
 
-lazy val root = tlCrossRootProject.aggregate(core, scuid, uuid, circe)
+lazy val tapir =
+  project
+    .in(file("tapir"))
+    .dependsOn(core % "compile->compile;test->test")
+    .settings(
+      name := "humanoid-tapir",
+      libraryDependencies ++= Seq(
+        "com.softwaremill.sttp.tapir" %% "tapir-core" % "1.10.4",
+        "org.scalameta"               %% "munit"      % "0.7.29" % Test
+      )
+    )
+
+lazy val root = tlCrossRootProject.aggregate(core, scuid, uuid, circe, tapir)

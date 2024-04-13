@@ -25,17 +25,15 @@ import io.circe.parser.decode
 import io.circe.syntax.*
 import me.wojnowski.humanoid.HumanId
 import me.wojnowski.humanoid.HumanIdOps
-import me.wojnowski.humanoid.IdConverter
+import me.wojnowski.humanoid.LowercaseStringId
 import munit.FunSuite
-
-import CodecTest.LowercaseString
 
 class CodecTest extends FunSuite {
 
-  val rawId: LowercaseString                   = LowercaseString.fromString("idvalue").toOption.get
-  val humanId: HumanId["pfx", LowercaseString] = HumanIdOps["pfx", LowercaseString].fromId(rawId)
-  val humanIdJsonWithPrefix: String            = "\"pfx_idvalue\""
-  val humanIdJsonWithoutPrefix: String         = "\"idvalue\""
+  val rawId: LowercaseStringId                   = LowercaseStringId.fromString("idvalue").toOption.get
+  val humanId: HumanId["pfx", LowercaseStringId] = HumanIdOps["pfx", LowercaseStringId].fromId(rawId)
+  val humanIdJsonWithPrefix: String              = "\"pfx_idvalue\""
+  val humanIdJsonWithoutPrefix: String           = "\"idvalue\""
 
   test("encoder encodes with prefix") {
     import me.wojnowski.humanoid.circe.strict.*
@@ -48,7 +46,7 @@ class CodecTest extends FunSuite {
   test("relaxed decoder accepts ID without prefix") {
     import me.wojnowski.humanoid.circe.relaxed.*
 
-    val result = decode[HumanId["pfx", LowercaseString]](humanIdJsonWithoutPrefix)
+    val result = decode[HumanId["pfx", LowercaseStringId]](humanIdJsonWithoutPrefix)
 
     assertEquals(result, Right(humanId))
   }
@@ -65,7 +63,7 @@ class CodecTest extends FunSuite {
   test("strict decoder accepts ID with correct prefix") {
     import me.wojnowski.humanoid.circe.strict.*
 
-    val result = decode[HumanId["pfx", LowercaseString]](humanIdJsonWithPrefix)
+    val result = decode[HumanId["pfx", LowercaseStringId]](humanIdJsonWithPrefix)
 
     assertEquals(result, Right(humanId))
   }
@@ -80,25 +78,8 @@ class CodecTest extends FunSuite {
   test("strict decoder rejects ID without prefix") {
     import me.wojnowski.humanoid.circe.strict.*
 
-    val result = decode[HumanId["other", LowercaseString]](humanIdJsonWithoutPrefix)
+    val result = decode[HumanId["other", LowercaseStringId]](humanIdJsonWithoutPrefix)
     assert(result.isLeft)
-  }
-
-}
-
-object CodecTest {
-  abstract case class LowercaseString private (value: String)
-
-  object LowercaseString {
-    def fromString(value: String): Either[String, LowercaseString] =
-      Either.cond(value.forall(_.isLower), new LowercaseString(value) {}, s"Value [$value] is not lowercase")
-
-    implicit val idConverter: IdConverter[LowercaseString] = new IdConverter[LowercaseString] {
-      override def fromString(raw: String): Either[String, LowercaseString] = LowercaseString.fromString(raw)
-
-      override def renderString(id: LowercaseString): String = id.value
-    }
-
   }
 
 }
