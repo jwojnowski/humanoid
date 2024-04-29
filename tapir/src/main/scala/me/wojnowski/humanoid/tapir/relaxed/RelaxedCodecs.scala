@@ -21,7 +21,7 @@
 
 package me.wojnowski.humanoid.tapir.relaxed
 
-import me.wojnowski.humanoid.*
+import me.wojnowski.humanoid._
 import sttp.tapir.Codec
 import sttp.tapir.Codec.PlainCodec
 

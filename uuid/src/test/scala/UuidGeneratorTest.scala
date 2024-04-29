@@ -22,7 +22,7 @@
 import cats.effect.std.UUIDGen
 import me.wojnowski.humanoid.HumanId
 import me.wojnowski.humanoid.HumanIdOps
-import me.wojnowski.humanoid.uuid.*
+import me.wojnowski.humanoid.uuid._
 import munit.FunSuite
 
 import java.util.UUID
