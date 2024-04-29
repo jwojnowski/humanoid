@@ -39,7 +39,7 @@ class CodecsTest extends FunSuite {
   val rawHumanIdWithoutPrefix: String = "idvalue"
 
   test("strict encodes with prefix") {
-    import me.wojnowski.humanoid.tapir.strict.*
+    import me.wojnowski.humanoid.tapir.strict._
 
     val result   = implicitly[Codec[String, PrefixedId, CodecFormat.TextPlain]].encode(humanId)
     val expected = rawHumanIdWithPrefix
@@ -48,7 +48,7 @@ class CodecsTest extends FunSuite {
   }
 
   test("relaxed encodes with prefix") {
-    import me.wojnowski.humanoid.tapir.relaxed.*
+    import me.wojnowski.humanoid.tapir.relaxed._
 
     val result   = implicitly[Codec[String, PrefixedId, CodecFormat.TextPlain]].encode(humanId)
     val expected = rawHumanIdWithPrefix
@@ -57,7 +57,7 @@ class CodecsTest extends FunSuite {
   }
 
   test("strict decodes prefixed ID") {
-    import me.wojnowski.humanoid.tapir.strict.*
+    import me.wojnowski.humanoid.tapir.strict._
 
     val result   = implicitly[Codec[String, PrefixedId, CodecFormat.TextPlain]].decode(rawHumanIdWithPrefix)
     val expected = DecodeResult.Value(humanId)
@@ -66,7 +66,7 @@ class CodecsTest extends FunSuite {
   }
 
   test("strict decoding fails on no prefix") {
-    import me.wojnowski.humanoid.tapir.strict.*
+    import me.wojnowski.humanoid.tapir.strict._
 
     val result = implicitly[Codec[String, PrefixedId, CodecFormat.TextPlain]].decode(rawHumanIdWithoutPrefix)
 
@@ -74,7 +74,7 @@ class CodecsTest extends FunSuite {
   }
 
   test("relaxed decodes prefixed ID") {
-    import me.wojnowski.humanoid.tapir.relaxed.*
+    import me.wojnowski.humanoid.tapir.relaxed._
 
     val result   = implicitly[Codec[String, PrefixedId, CodecFormat.TextPlain]].decode(rawHumanIdWithPrefix)
     val expected = DecodeResult.Value(humanId)
@@ -83,7 +83,7 @@ class CodecsTest extends FunSuite {
   }
 
   test("relaxed decodes no prefix") {
-    import me.wojnowski.humanoid.tapir.relaxed.*
+    import me.wojnowski.humanoid.tapir.relaxed._
 
     val result   = implicitly[Codec[String, PrefixedId, CodecFormat.TextPlain]].decode(rawHumanIdWithoutPrefix)
     val expected = DecodeResult.Value(humanId)
@@ -92,7 +92,7 @@ class CodecsTest extends FunSuite {
   }
 
   test("relaxed decodes wrong prefix if ID is valid") {
-    import me.wojnowski.humanoid.tapir.relaxed.*
+    import me.wojnowski.humanoid.tapir.relaxed._
 
     val result   = implicitly[Codec[String, HumanId["pfx", String], CodecFormat.TextPlain]].decode("other_idvalue")
     val expected = DecodeResult.Value(HumanIdOps["pfx", String].fromId("other_idvalue"))

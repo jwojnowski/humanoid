@@ -22,7 +22,7 @@
 package me.wojnowski.humanoid.circe
 
 import io.circe.parser.decode
-import io.circe.syntax.*
+import io.circe.syntax._
 import me.wojnowski.humanoid.HumanId
 import me.wojnowski.humanoid.HumanIdOps
 import me.wojnowski.humanoid.LowercaseStringId
@@ -36,7 +36,7 @@ class CodecTest extends FunSuite {
   val humanIdJsonWithoutPrefix: String           = "\"idvalue\""
 
   test("encoder encodes with prefix") {
-    import me.wojnowski.humanoid.circe.strict.*
+    import me.wojnowski.humanoid.circe.strict._
 
     val result = humanId.asJson.noSpaces
 
@@ -44,7 +44,7 @@ class CodecTest extends FunSuite {
   }
 
   test("relaxed decoder accepts ID without prefix") {
-    import me.wojnowski.humanoid.circe.relaxed.*
+    import me.wojnowski.humanoid.circe.relaxed._
 
     val result = decode[HumanId["pfx", LowercaseStringId]](humanIdJsonWithoutPrefix)
 
@@ -52,7 +52,7 @@ class CodecTest extends FunSuite {
   }
 
   test("relaxed decoder accepts ID with wrong prefix if it parses as valid ID") {
-    import me.wojnowski.humanoid.circe.relaxed.*
+    import me.wojnowski.humanoid.circe.relaxed._
 
     val result   = decode[HumanId["other", String]](humanIdJsonWithPrefix)
     val expected = Right(HumanIdOps["other", String].fromId(humanId.renderWithPrefix))
@@ -61,7 +61,7 @@ class CodecTest extends FunSuite {
   }
 
   test("strict decoder accepts ID with correct prefix") {
-    import me.wojnowski.humanoid.circe.strict.*
+    import me.wojnowski.humanoid.circe.strict._
 
     val result = decode[HumanId["pfx", LowercaseStringId]](humanIdJsonWithPrefix)
 
@@ -69,14 +69,14 @@ class CodecTest extends FunSuite {
   }
 
   test("strict decoder rejects ID with incorrect prefix") {
-    import me.wojnowski.humanoid.circe.strict.*
+    import me.wojnowski.humanoid.circe.strict._
 
     val result = decode[HumanId["other", String]](humanIdJsonWithPrefix)
     assert(result.isLeft)
   }
 
   test("strict decoder rejects ID without prefix") {
-    import me.wojnowski.humanoid.circe.strict.*
+    import me.wojnowski.humanoid.circe.strict._
 
     val result = decode[HumanId["other", LowercaseStringId]](humanIdJsonWithoutPrefix)
     assert(result.isLeft)
