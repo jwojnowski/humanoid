@@ -21,10 +21,10 @@
 
 package me.wojnowski.humanoid.tapir
 
-import me.wojnowski.humanoid.HumanId
+import me.wojnowski.humanoid.PrefixedId
 import sttp.tapir.Schema
 
 trait TapirSchemas {
-  implicit def schemaForHumanId[P <: String, Id](implicit valueOf: ValueOf[P]): Schema[HumanId[P, Id]] =
+  implicit def schemaForPrefixedId[P <: String, Id](implicit valueOf: ValueOf[P]): Schema[PrefixedId[P, Id]] =
     Schema.string.format(s"ID with prefix: ${valueOf.value}_")
 }

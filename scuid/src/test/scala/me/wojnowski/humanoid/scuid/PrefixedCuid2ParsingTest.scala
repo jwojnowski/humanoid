@@ -23,15 +23,15 @@ package me.wojnowski.humanoid.scuid
 
 import munit.CatsEffectSuite
 
-class HumanCuid2ParsingTest extends CatsEffectSuite {
-  type UserId = HumanCuid2["user"]
-  val UserId: HumanCuid2Ops["user"] = HumanCuid2Ops["user"]
+class PrefixedCuid2ParsingTest extends CatsEffectSuite {
+  type UserId = PrefixedCuid2["user"]
+  val UserId: PrefixedCuid2Ops["user"] = PrefixedCuid2Ops["user"]
 
-  type AccountId = HumanCuid2Long["acc"]
-  val AccountId: HumanCuid2LongOps["acc"] = HumanCuid2LongOps["acc"]
+  type AccountId = PrefixedCuid2Long["acc"]
+  val AccountId: PrefixedCuid2LongOps["acc"] = PrefixedCuid2LongOps["acc"]
 
-  type CategoryId = HumanCuid2Custom["cat", 10]
-  val CategoryId: HumanCuid2CustomOps["cat", 10] = HumanCuid2CustomOps["cat", 10]
+  type CategoryId = PrefixedCuid2Custom["cat", 10]
+  val CategoryId: PrefixedCuid2CustomOps["cat", 10] = PrefixedCuid2CustomOps["cat", 10]
 
   val rawUserIdWithoutPrefix  = "xk3qfe06254vkcqg48tl4j5f"
   val rawUserIdWithPrefix     = s"user_$rawUserIdWithoutPrefix"

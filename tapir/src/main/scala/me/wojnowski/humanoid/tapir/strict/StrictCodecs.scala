@@ -26,6 +26,9 @@ import sttp.tapir.Codec
 import sttp.tapir.Codec.PlainCodec
 
 trait StrictCodecs {
-  implicit def codecForHumanId[P <: String, Id](implicit valueOf: ValueOf[P], IdConverter: IdConverter[Id]): PlainCodec[HumanId[P, Id]] =
-    Codec.string.mapEither(HumanIdOps[P, Id].parseRequirePrefix)(_.renderWithPrefix)
+
+  implicit def codecForPrefixedId[P <: String, Id](implicit valueOf: ValueOf[P], IdConverter: IdConverter[Id])
+    : PlainCodec[PrefixedId[P, Id]] =
+    Codec.string.mapEither(PrefixedIdOps[P, Id].parseRequirePrefix)(_.renderWithPrefix)
+
 }

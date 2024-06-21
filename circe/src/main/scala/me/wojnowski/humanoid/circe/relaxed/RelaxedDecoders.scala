@@ -23,13 +23,15 @@ package me.wojnowski.humanoid.circe.relaxed
 
 import io.circe.Decoder
 import io.circe.KeyDecoder
-import me.wojnowski.humanoid.HumanId
 import me.wojnowski.humanoid.IdConverter
+import me.wojnowski.humanoid.PrefixedId
 
 trait RelaxedDecoders {
-  implicit def humanIdDecoder[P <: String, Id](implicit valueOfPrefix: ValueOf[P], idable: IdConverter[Id]): Decoder[HumanId[P, Id]] =
-    Decoder.decodeString.emap(HumanId.parsePrefixOptional[P, Id])
+  implicit def prefixedIdDecoder[P <: String, Id](implicit valueOfPrefix: ValueOf[P], idable: IdConverter[Id]): Decoder[PrefixedId[P, Id]] =
+    Decoder.decodeString.emap(PrefixedId.parsePrefixOptional[P, Id])
 
-  implicit def humanIdKeyDecoder[P <: String, Id](implicit valueOfPrefix: ValueOf[P], idable: IdConverter[Id]): KeyDecoder[HumanId[P, Id]] =
-    KeyDecoder.instance(HumanId.parsePrefixOptional[P, Id](_).toOption)
+  implicit def prefixedIdKeyDecoder[P <: String, Id](implicit valueOfPrefix: ValueOf[P], idable: IdConverter[Id])
+    : KeyDecoder[PrefixedId[P, Id]] =
+    KeyDecoder.instance(PrefixedId.parsePrefixOptional[P, Id](_).toOption)
+
 }

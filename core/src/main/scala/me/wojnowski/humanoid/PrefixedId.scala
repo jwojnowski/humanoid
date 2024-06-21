@@ -24,7 +24,7 @@ package me.wojnowski.humanoid
 import cats.Functor
 import cats.implicits.toFunctorOps
 
-final case class HumanId[P <: String, Id](id: Id)(implicit valueOfPrefix: ValueOf[P], idable: IdConverter[Id]) {
+final case class PrefixedId[P <: String, Id](id: Id)(implicit valueOfPrefix: ValueOf[P], idable: IdConverter[Id]) {
   def renderWithPrefix: String = s"${valueOfPrefix.value}_$renderNoPrefix"
 
   def renderNoPrefix: String = IdConverter[Id].renderString(id)
@@ -32,13 +32,13 @@ final case class HumanId[P <: String, Id](id: Id)(implicit valueOfPrefix: ValueO
   override def toString: String = renderWithPrefix
 }
 
-case object HumanId {
+case object PrefixedId {
   def parseRequirePrefix[P <: String]: ParseRequirePrefixPartiallyApplied[P] = new ParseRequirePrefixPartiallyApplied[P]
 
   def fromId[P <: String]: FromIdPartiallyApplied[P] = new FromIdPartiallyApplied[P]
 
-  final private[HumanId] class FromIdPartiallyApplied[P <: String](private val dummy: Boolean = true) extends AnyVal {
-    def apply[Id](id: Id)(implicit valueOfPrefix: ValueOf[P], idable: IdConverter[Id]): HumanId[P, Id] = HumanId[P, Id](id)
+  final private[PrefixedId] class FromIdPartiallyApplied[P <: String](private val dummy: Boolean = true) extends AnyVal {
+    def apply[Id](id: Id)(implicit valueOfPrefix: ValueOf[P], idable: IdConverter[Id]): PrefixedId[P, Id] = PrefixedId[P, Id](id)
   }
 
   def parsePrefixOptional[P <: String, Id](
@@ -46,15 +46,15 @@ case object HumanId {
   )(implicit
     valueOfPrefix: ValueOf[P],
     idable: IdConverter[Id]
-  ): Either[String, HumanId[P, Id]] =
-    idable.fromString(rawString.stripPrefix(valueOfPrefix.value + "_")).map(id => HumanId[P, Id](id))
+  ): Either[String, PrefixedId[P, Id]] =
+    idable.fromString(rawString.stripPrefix(valueOfPrefix.value + "_")).map(id => PrefixedId[P, Id](id))
 
-  final private[HumanId] class ParseRequirePrefixPartiallyApplied[P <: String](private val dummy: Boolean = true) extends AnyVal {
+  final private[PrefixedId] class ParseRequirePrefixPartiallyApplied[P <: String](private val dummy: Boolean = true) extends AnyVal {
 
-    def apply[Id](rawString: String)(implicit idable: IdConverter[Id], valueOfPrefix: ValueOf[P]): Either[String, HumanId[P, Id]] =
+    def apply[Id](rawString: String)(implicit idable: IdConverter[Id], valueOfPrefix: ValueOf[P]): Either[String, PrefixedId[P, Id]] =
       rawString.split('_') match {
         case Array(prefix, rawId) if prefix == valueOfPrefix.value =>
-          IdConverter[Id].fromString(rawId).map(id => HumanId[P, Id](id))
+          IdConverter[Id].fromString(rawId).map(id => PrefixedId[P, Id](id))
         case Array(prefix, _)                                      =>
           Left(s"Unexpected prefix [$prefix], expected [${valueOfPrefix.value}]")
         case _                                                     =>
@@ -65,18 +65,18 @@ case object HumanId {
 
 }
 
-class HumanIdOps[P <: String: ValueOf, Id: IdConverter] {
-  def parseRequirePrefix(rawString: String): Either[String, HumanId[P, Id]] = HumanId.parseRequirePrefix[P][Id](rawString)
+class PrefixedIdOps[P <: String: ValueOf, Id: IdConverter] {
+  def parseRequirePrefix(rawString: String): Either[String, PrefixedId[P, Id]] = PrefixedId.parseRequirePrefix[P][Id](rawString)
 
-  def parsePrefixOptional(rawString: String): Either[String, HumanId[P, Id]] = HumanId.parsePrefixOptional[P, Id](rawString)
+  def parsePrefixOptional(rawString: String): Either[String, PrefixedId[P, Id]] = PrefixedId.parsePrefixOptional[P, Id](rawString)
 
-  def fromId(id: Id): HumanId[P, Id] = HumanId.fromId[P](id)
+  def fromId(id: Id): PrefixedId[P, Id] = PrefixedId.fromId[P](id)
 
-  def random[F[_]: Functor](implicit idGenerator: IdGenerator[F, Id]): F[HumanId[P, Id]] =
-    idGenerator.generate.map(id => HumanId[P, Id](id))
+  def random[F[_]: Functor](implicit idGenerator: IdGenerator[F, Id]): F[PrefixedId[P, Id]] =
+    idGenerator.generate.map(id => PrefixedId[P, Id](id))
 }
 
-object HumanIdOps {
-  def apply[P <: String: ValueOf, Id: IdConverter]: HumanIdOps[P, Id] =
-    new HumanIdOps[P, Id]
+object PrefixedIdOps {
+  def apply[P <: String: ValueOf, Id: IdConverter]: PrefixedIdOps[P, Id] =
+    new PrefixedIdOps[P, Id]
 }

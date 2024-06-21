@@ -26,6 +26,9 @@ import sttp.tapir.Codec
 import sttp.tapir.Codec.PlainCodec
 
 trait RelaxedCodecs {
-  implicit def codecForHumanId[P <: String, Id](implicit valueOf: ValueOf[P], IdConverter: IdConverter[Id]): PlainCodec[HumanId[P, Id]] =
-    Codec.string.mapEither(HumanIdOps[P, Id].parsePrefixOptional)(_.renderWithPrefix)
+
+  implicit def codecForPrefixedId[P <: String, Id](implicit valueOf: ValueOf[P], IdConverter: IdConverter[Id])
+    : PlainCodec[PrefixedId[P, Id]] =
+    Codec.string.mapEither(PrefixedIdOps[P, Id].parsePrefixOptional)(_.renderWithPrefix)
+
 }

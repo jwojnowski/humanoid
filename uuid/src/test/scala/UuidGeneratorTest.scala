@@ -20,8 +20,8 @@
  */
 
 import cats.effect.std.UUIDGen
-import me.wojnowski.humanoid.HumanId
-import me.wojnowski.humanoid.HumanIdOps
+import me.wojnowski.humanoid.PrefixedId
+import me.wojnowski.humanoid.PrefixedIdOps
 import me.wojnowski.humanoid.uuid._
 import munit.FunSuite
 
@@ -30,8 +30,8 @@ import scala.util.Success
 import scala.util.Try
 
 class UuidGeneratorTest extends FunSuite {
-  type CustomerId = HumanId["cus", UUID]
-  val CustomerId = HumanIdOps["cus", UUID]
+  type CustomerId = PrefixedId["cus", UUID]
+  val CustomerId = PrefixedIdOps["cus", UUID]
 
   val uuid1 = UUID.fromString("076831d6-41a0-4161-9217-fc04ac8fa5a2")
 
