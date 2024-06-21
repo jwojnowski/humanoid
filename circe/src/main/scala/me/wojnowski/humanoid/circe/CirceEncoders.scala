@@ -23,14 +23,14 @@ package me.wojnowski.humanoid.circe
 
 import io.circe.Encoder
 import io.circe.KeyEncoder
-import me.wojnowski.humanoid.HumanId
+import me.wojnowski.humanoid.PrefixedId
 
 trait CirceEncoders {
 
-  implicit def humanIdEncoder[P <: String, Id]: Encoder[HumanId[P, Id]] =
+  implicit def prefixedIdEncoder[P <: String, Id]: Encoder[PrefixedId[P, Id]] =
     Encoder.encodeString.contramap(_.renderWithPrefix)
 
-  implicit def humanIdKeyEncoder[P <: String, Id]: KeyEncoder[HumanId[P, Id]] =
+  implicit def prefixedIdKeyEncoder[P <: String, Id]: KeyEncoder[PrefixedId[P, Id]] =
     KeyEncoder.instance(_.renderWithPrefix)
 
 }

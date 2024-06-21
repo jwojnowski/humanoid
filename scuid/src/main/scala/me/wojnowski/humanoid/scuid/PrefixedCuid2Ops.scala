@@ -19,14 +19,13 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package me.wojnowski.humanoid.uuid
+package me.wojnowski.humanoid.scuid
 
-import me.wojnowski.humanoid.HumanIdOps
+import me.wojnowski.humanoid.PrefixedIdOps
+import me.wojnowski.scuid.Cuid2
 
-import java.util.UUID
+class PrefixedCuid2Ops[P <: String: ValueOf] extends PrefixedIdOps[P, Cuid2]
 
-class HumanUuidOps[P <: String: ValueOf] extends HumanIdOps[P, UUID]
-
-object HumanUuidOps {
-  def apply[P <: String: ValueOf]: HumanUuidOps[P] = new HumanUuidOps[P]
+object PrefixedCuid2Ops {
+  def apply[P <: String: ValueOf]: PrefixedCuid2Ops[P] = new PrefixedCuid2Ops[P]
 }

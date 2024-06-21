@@ -26,17 +26,17 @@ import me.wojnowski.scuid.Cuid2Gen
 import munit.CatsEffectSuite
 
 // TODO property-based?
-class HumanCuid2GenerationTest extends CatsEffectSuite {
+class PrefixedCuid2GenerationTest extends CatsEffectSuite {
   implicit val constCuid2Gen: Cuid2Gen[IO] = Cuid2Gen.custom[IO]("machine", () => IO.pure(0.5), () => IO.pure(1L), () => IO.pure(0L))
 
-  type UserId = HumanCuid2["user"]
-  val UserId: HumanCuid2Ops["user"] = HumanCuid2Ops["user"]
+  type UserId = PrefixedCuid2["user"]
+  val UserId: PrefixedCuid2Ops["user"] = PrefixedCuid2Ops["user"]
 
-  type AccountId = HumanCuid2Long["acc"]
-  val AccountId: HumanCuid2LongOps["acc"] = HumanCuid2LongOps["acc"]
+  type AccountId = PrefixedCuid2Long["acc"]
+  val AccountId: PrefixedCuid2LongOps["acc"] = PrefixedCuid2LongOps["acc"]
 
-  type CategoryId = HumanCuid2Custom["cat", 27]
-  val CategoryId: HumanCuid2CustomOps["cat", 27] = HumanCuid2CustomOps["cat", 27]
+  type CategoryId = PrefixedCuid2Custom["cat", 27]
+  val CategoryId: PrefixedCuid2CustomOps["cat", 27] = PrefixedCuid2CustomOps["cat", 27]
 
   val rawUserIdWithoutPrefix = "niv8z1jigmjr5bp8c6xbqfl6"
   val rawUserIdWithPrefix    = s"user_$rawUserIdWithoutPrefix"

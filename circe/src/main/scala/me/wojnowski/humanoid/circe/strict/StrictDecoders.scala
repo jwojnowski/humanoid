@@ -23,13 +23,15 @@ package me.wojnowski.humanoid.circe.strict
 
 import io.circe.Decoder
 import io.circe.KeyDecoder
-import me.wojnowski.humanoid.HumanId
 import me.wojnowski.humanoid.IdConverter
+import me.wojnowski.humanoid.PrefixedId
 
 trait StrictDecoders {
-  implicit def humanIdDecoder[P <: String, Id](implicit valueOfPrefix: ValueOf[P], idable: IdConverter[Id]): Decoder[HumanId[P, Id]] =
-    Decoder.decodeString.emap(HumanId.parseRequirePrefix[P][Id])
+  implicit def prefixedIdDecoder[P <: String, Id](implicit valueOfPrefix: ValueOf[P], idable: IdConverter[Id]): Decoder[PrefixedId[P, Id]] =
+    Decoder.decodeString.emap(PrefixedId.parseRequirePrefix[P][Id])
 
-  implicit def humanIdKeyDecoder[P <: String, Id](implicit valueOfPrefix: ValueOf[P], idable: IdConverter[Id]): KeyDecoder[HumanId[P, Id]] =
-    KeyDecoder.instance(HumanId.parseRequirePrefix[P][Id](_).toOption)
+  implicit def prefixedIdKeyDecoder[P <: String, Id](implicit valueOfPrefix: ValueOf[P], idable: IdConverter[Id])
+    : KeyDecoder[PrefixedId[P, Id]] =
+    KeyDecoder.instance(PrefixedId.parseRequirePrefix[P][Id](_).toOption)
+
 }

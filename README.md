@@ -25,11 +25,11 @@ libraryDependencies += "me.wojnowski" %% "humanoid-tapir" % "<version>" // optio
 Let's define an ID with prefix "inv" and `String` as its the underlying ID type:
 
 ```scala
-type InvoiceId = HumanId["inv", String]
-val InvoiceId = new HumanIdOps["inv", String]
+type InvoiceId = PrefixedId["inv", String]
+val InvoiceId = new PrefixedIdOps["inv", String]
 
-type CustomerId = HumanId["cus", String]
-val CustomerId = new HumanIdOps["cus", String]
+type CustomerId = PrefixedId["cus", String]
+val CustomerId = new PrefixedIdOps["cus", String]
 
 val invoiceId1: Either[String, InvoiceId] = InvoiceId.parseRequirePrefix("inv_1234")
 val invoiceId2: InvoiceId = InvoiceId.fromId("2345")
@@ -44,8 +44,8 @@ val customerId1: Either[String, CustomerId] = CustomerId.parseRequirePrefix("cus
 For random IDs it is possible to generate the ID:
 
 ```scala
-type CustomerId = HumanId["cus", Cuid2]
-val CustomerId = new HumanIdOps["cus", Cuid2]
+type CustomerId = PrefixedId["cus", Cuid2]
+val CustomerId = new PrefixedIdOps["cus", Cuid2]
 
 val id: F[CustomerId] = CustomerId.random[F]
 ```

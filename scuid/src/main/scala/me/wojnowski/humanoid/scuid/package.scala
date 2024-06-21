@@ -26,7 +26,7 @@ import me.wojnowski.scuid.Cuid2Custom
 import me.wojnowski.scuid.Cuid2Long
 
 package object scuid extends Generators with Converters {
-  type HumanCuid2[P <: String]                 = HumanId[P, Cuid2]
-  type HumanCuid2Long[P <: String]             = HumanId[P, Cuid2Long]
-  type HumanCuid2Custom[P <: String, L <: Int] = HumanId[P, Cuid2Custom[L]]
+  type PrefixedCuid2[P <: String]                 = PrefixedId[P, Cuid2]
+  type PrefixedCuid2Long[P <: String]             = PrefixedId[P, Cuid2Long]
+  type PrefixedCuid2Custom[P <: String, L <: Int] = PrefixedId[P, Cuid2Custom[L]]
 }

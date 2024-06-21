@@ -21,11 +21,11 @@
 
 package me.wojnowski.humanoid.scuid
 
-import me.wojnowski.humanoid.HumanIdOps
+import me.wojnowski.humanoid.PrefixedIdOps
 import me.wojnowski.scuid.Cuid2Long
 
-class HumanCuid2LongOps[P <: String: ValueOf] extends HumanIdOps[P, Cuid2Long]
+class PrefixedCuid2LongOps[P <: String: ValueOf] extends PrefixedIdOps[P, Cuid2Long]
 
-object HumanCuid2LongOps {
-  def apply[P <: String: ValueOf]: HumanCuid2LongOps[P] = new HumanCuid2LongOps[P]
+object PrefixedCuid2LongOps {
+  def apply[P <: String: ValueOf]: PrefixedCuid2LongOps[P] = new PrefixedCuid2LongOps[P]
 }
