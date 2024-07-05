@@ -26,8 +26,8 @@ lazy val core =
       name := "humanoid-core",
       libraryDependencies ++= Seq(
         "org.typelevel" %% "cats-core"        % "2.12.0",
-        "org.scalameta" %% "munit"            % "0.7.29" % Test,
-        "org.scalameta" %% "munit-scalacheck" % "0.7.29" % Test
+        "org.scalameta" %% "munit"            % "1.0.0" % Test,
+        "org.scalameta" %% "munit-scalacheck" % "1.0.0" % Test
       )
     )
 
@@ -38,9 +38,9 @@ lazy val uuid =
     .settings(
       name := "humanoid-uuid",
       libraryDependencies ++= Seq(
-        "org.typelevel" %% "cats-effect"         % "3.5.4",
-        "org.scalameta" %% "munit"               % "0.7.29" % Test,
-        "org.typelevel" %% "munit-cats-effect-3" % "1.0.7"  % Test
+        "org.typelevel" %% "cats-effect"       % "3.5.4",
+        "org.scalameta" %% "munit"             % "1.0.0" % Test,
+        "org.typelevel" %% "munit-cats-effect" % "2.0.0" % Test
       )
     )
 
@@ -51,10 +51,10 @@ lazy val scuid =
     .settings(
       name := "humanoid-scuid",
       libraryDependencies ++= Seq(
-        "me.wojnowski"  %% "scuid"               % "0.2.0",
-        "org.scalameta" %% "munit"               % "0.7.29" % Test,
-        "org.typelevel" %% "cats-effect"         % "3.5.4"  % Test,
-        "org.typelevel" %% "munit-cats-effect-3" % "1.0.7"  % Test
+        "me.wojnowski"  %% "scuid"             % "0.2.0",
+        "org.scalameta" %% "munit"             % "1.0.0" % Test,
+        "org.typelevel" %% "cats-effect"       % "3.5.4" % Test,
+        "org.typelevel" %% "munit-cats-effect" % "2.0.0" % Test
       )
     )
 
@@ -67,7 +67,7 @@ lazy val circe =
       libraryDependencies ++= Seq(
         "io.circe"      %% "circe-core"   % "0.14.9",
         "io.circe"      %% "circe-parser" % "0.14.9" % Test,
-        "org.scalameta" %% "munit"        % "0.7.29" % Test
+        "org.scalameta" %% "munit"        % "1.0.0"  % Test
       )
     )
 
@@ -79,7 +79,7 @@ lazy val tapir =
       name := "humanoid-tapir",
       libraryDependencies ++= Seq(
         "com.softwaremill.sttp.tapir" %% "tapir-core" % "1.10.12",
-        "org.scalameta"               %% "munit"      % "0.7.29" % Test
+        "org.scalameta"               %% "munit"      % "1.0.0" % Test
       )
     )
 
