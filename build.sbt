@@ -65,9 +65,9 @@ lazy val circe =
     .settings(
       name := "humanoid-circe",
       libraryDependencies ++= Seq(
-        "io.circe"      %% "circe-core"   % "0.14.9",
-        "io.circe"      %% "circe-parser" % "0.14.9" % Test,
-        "org.scalameta" %% "munit"        % "1.0.1"  % Test
+        "io.circe"      %% "circe-core"   % "0.14.10",
+        "io.circe"      %% "circe-parser" % "0.14.10" % Test,
+        "org.scalameta" %% "munit"        % "1.0.1"   % Test
       )
     )
 
