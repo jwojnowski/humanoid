@@ -26,7 +26,7 @@ lazy val core =
       name := "humanoid-core",
       libraryDependencies ++= Seq(
         "org.typelevel" %% "cats-core"        % "2.13.0",
-        "org.scalameta" %% "munit"            % "1.1.0" % Test,
+        "org.scalameta" %% "munit"            % "1.1.1" % Test,
         "org.scalameta" %% "munit-scalacheck" % "1.1.0" % Test
       )
     )
@@ -39,7 +39,7 @@ lazy val uuid =
       name := "humanoid-uuid",
       libraryDependencies ++= Seq(
         "org.typelevel" %% "cats-effect"       % "3.6.1",
-        "org.scalameta" %% "munit"             % "1.1.0" % Test,
+        "org.scalameta" %% "munit"             % "1.1.1" % Test,
         "org.typelevel" %% "munit-cats-effect" % "2.1.0" % Test
       )
     )
@@ -52,7 +52,7 @@ lazy val scuid =
       name := "humanoid-scuid",
       libraryDependencies ++= Seq(
         "me.wojnowski"  %% "scuid"             % "0.2.0",
-        "org.scalameta" %% "munit"             % "1.1.0" % Test,
+        "org.scalameta" %% "munit"             % "1.1.1" % Test,
         "org.typelevel" %% "cats-effect"       % "3.6.1" % Test,
         "org.typelevel" %% "munit-cats-effect" % "2.1.0" % Test
       )
@@ -67,7 +67,7 @@ lazy val circe =
       libraryDependencies ++= Seq(
         "io.circe"      %% "circe-core"   % "0.14.13",
         "io.circe"      %% "circe-parser" % "0.14.13" % Test,
-        "org.scalameta" %% "munit"        % "1.1.0"   % Test
+        "org.scalameta" %% "munit"        % "1.1.1"   % Test
       )
     )
 
@@ -79,7 +79,7 @@ lazy val tapir =
       name := "humanoid-tapir",
       libraryDependencies ++= Seq(
         "com.softwaremill.sttp.tapir" %% "tapir-core" % "1.11.25",
-        "org.scalameta"               %% "munit"      % "1.1.0" % Test
+        "org.scalameta"               %% "munit"      % "1.1.1" % Test
       )
     )
 
