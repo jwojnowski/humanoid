@@ -10,9 +10,7 @@ ThisBuild / developers       := List(
   tlGitHubDev("jwojnowski", "Jakub Wojnowski")
 )
 
-// publish to s01.oss.sonatype.org (set to true to publish to oss.sonatype.org instead)
-ThisBuild / tlSonatypeUseLegacyHost    := false
-ThisBuild / tlCiReleaseBranches        := Seq("main")
+ThisBuild / tlCiReleaseBranches        := Seq()
 ThisBuild / githubWorkflowJavaVersions := Seq(JavaSpec.temurin("21"))
 
 val Scala213 = "2.13.16"
