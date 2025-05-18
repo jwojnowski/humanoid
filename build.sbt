@@ -49,7 +49,7 @@ lazy val scuid =
     .settings(
       name := "humanoid-scuid",
       libraryDependencies ++= Seq(
-        "me.wojnowski"  %% "scuid"             % "0.2.0",
+        "me.wojnowski"  %% "scuid"             % "0.2.1",
         "org.scalameta" %% "munit"             % "1.1.1" % Test,
         "org.typelevel" %% "cats-effect"       % "3.6.1" % Test,
         "org.typelevel" %% "munit-cats-effect" % "2.1.0" % Test
