@@ -76,7 +76,7 @@ lazy val tapir =
     .settings(
       name := "humanoid-tapir",
       libraryDependencies ++= Seq(
-        "com.softwaremill.sttp.tapir" %% "tapir-core" % "1.11.29",
+        "com.softwaremill.sttp.tapir" %% "tapir-core" % "1.11.32",
         "org.scalameta"               %% "munit"      % "1.1.1" % Test
       )
     )
