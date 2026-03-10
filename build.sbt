@@ -37,7 +37,7 @@ lazy val uuid =
     .settings(
       name := "humanoid-uuid",
       libraryDependencies ++= Seq(
-        "org.typelevel" %% "cats-effect"       % "3.6.3",
+        "org.typelevel" %% "cats-effect"       % "3.7.0",
         "org.scalameta" %% "munit"             % "1.2.4" % Test,
         "org.typelevel" %% "munit-cats-effect" % "2.1.0" % Test
       )
@@ -52,7 +52,7 @@ lazy val scuid =
       libraryDependencies ++= Seq(
         "me.wojnowski"  %% "scuid"             % "0.2.1",
         "org.scalameta" %% "munit"             % "1.2.4" % Test,
-        "org.typelevel" %% "cats-effect"       % "3.6.3" % Test,
+        "org.typelevel" %% "cats-effect"       % "3.7.0" % Test,
         "org.typelevel" %% "munit-cats-effect" % "2.1.0" % Test
       )
     )
